@@ -1,9 +1,10 @@
-package client;
+package clients;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import models.Order;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -12,7 +13,7 @@ public class OrderApiClient {
     private static final String API_V1_ORDERS = "/api/v1/orders";
 
     public OrderApiClient() {
-        RestAssured.baseURI = "https://praktikum-services.ru";
+        RestAssured.baseURI = "https://qa-scooter.education-services.ru/";
     }
 
     @Step("Создать заказ")
