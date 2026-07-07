@@ -1,23 +1,33 @@
-package utils;
-
-import java.util.Random;
+import net.datafaker.Faker;
 
 public class Utils {
-    public static String randomString() {
-        return randomString(10);
+    private static final Faker FAKER = new Faker();
+
+    public static String randomLogin() {
+        return FAKER.name().username();
     }
 
-    public static String randomString(int length) {
-        Random random = new Random();
-        int leftLimit = 97;
-        int rightLimit = 122;
-        StringBuilder buffer = new StringBuilder(length);
+    public static String randomPassword() {
+        return FAKER.internet().password(6, 12);
+    }
 
-        for(int i = 0; i < length; ++i) {
-            int randomLimitedInt = leftLimit + (int)(random.nextFloat() * (float)(rightLimit - leftLimit + 1));
-            buffer.append(Character.toChars(randomLimitedInt));
-        }
+    public static String randomFirstName() {
+        return FAKER.name().firstName();
+    }
 
-        return buffer.toString();
+    public static String randomLastName() {
+        return FAKER.name().lastName();
+    }
+
+    public static String randomAddress() {
+        return FAKER.address().streetAddress();
+    }
+
+    public static String randomPhone() {
+        return FAKER.phoneNumber().cellPhone();
+    }
+
+    public static String randomComment() {
+        return FAKER.lorem().sentence();
     }
 }

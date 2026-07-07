@@ -1,1 +1,0 @@
-{"uuid":"50eace2d-0419-401c-a3eb-e481e03cb228","name":"cannotCreateCourierWithoutLogin()","children":["0a4cbcf9-152f-4302-84a8-5650cb218373"],"befores":[],"afters":[{"name":"tearDown","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1783300707081,"stop":1783300707082}],"start":1783300703215,"stop":1783300707214}

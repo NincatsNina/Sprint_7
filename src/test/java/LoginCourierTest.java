@@ -1,10 +1,12 @@
 import clients.CourierApiClient;
+import io.qameta.allure.Description;
 import io.qameta.allure.junit5.AllureJunit5;
 import io.restassured.response.Response;
 import models.Courier;
 import models.CourierLoginResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -23,12 +25,14 @@ public class LoginCourierTest {
     private String id;
 
     @BeforeEach
+    @DisplayName("Предварительное создание курьера")
     public void setUp() {
         courier = randomCourier();
         courierApiClient.createCourier(courier);
     }
 
     @AfterEach
+    @DisplayName("Удаление тестовых данных")
     public void tearDown() {
         if (id != null) {
             courierApiClient.deleteCourier(id);
@@ -42,6 +46,8 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Успешная авторизация курьера")
+    @Description("Проверяем, что действующий курьер может войти в систему и получает валидный id")
     public void courierCanLoginSuccessfully() {
         Response response = courierApiClient.loginCourier(fromCourier(courier));
 
@@ -51,6 +57,8 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Ошибка авторизации при неверном пароле")
+    @Description("Проверяем возвращение ошибки 404 при попытке авторизоваться с некорректным паролем")
     public void loginWithIncorrectPasswordReturnsError() {
         Response response = courierApiClient.loginCourier(from(courier.getLogin(), "wrong_pass"));
 
@@ -59,6 +67,8 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Ошибка авторизации при пустом логине")
+    @Description("Проверяем возвращение ошибки 400 при передаче пустого логина в запросе")
     public void loginWithoutUsernameReturnsError() {
         Response response = courierApiClient.loginCourier(from("", courier.getPassword()));
 
@@ -67,6 +77,8 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Ошибка авторизации несуществующего курьера")
+    @Description("Проверяем, что при попытке входа под несуществующими данными возвращается ошибка 404")
     public void loginNonExistentCourierReturnsError() {
         Response response = courierApiClient.loginCourier(from("non_existent_user_999", "some_pass"));
 

@@ -1,9 +1,8 @@
 package models;
 
+import lombok.Getter;
+
+@Getter
 public class CourierLoginResponse {
     private String id;
-
-    public String getId() {
-        return id;
-    }
 }

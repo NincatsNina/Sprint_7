@@ -1,8 +1,10 @@
 import clients.OrderApiClient;
+import io.qameta.allure.Description;
 import io.qameta.allure.junit5.AllureJunit5;
 import io.restassured.response.Response;
 import models.Order;
 import models.OrderCreateResponse;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,6 +35,8 @@ public class CreateOrderTest {
 
     @ParameterizedTest
     @MethodSource("colorProvider")
+    @DisplayName("Успешное создание заказа с разными цветами")
+    @Description("Проверяем создание заказа при различных комбинациях цветов")
     public void createOrderWithVariousColors(List<String> colors) {
         Order order = new Order()
                 .setFirstName("Alex")
@@ -53,6 +57,8 @@ public class CreateOrderTest {
     }
 
     @Test
+    @DisplayName("Успешное получение списка существующих заказов")
+    @Description("Проверяем получение списка заказов")
     public void getOrderListReturnsOrders() {
         Response response = orderApiClient.getOrderList();
         assertEquals(SC_OK, response.statusCode(), "Статус-код некорректен");
