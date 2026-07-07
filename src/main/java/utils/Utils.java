@@ -1,3 +1,5 @@
+package utils;
+
 import net.datafaker.Faker;
 
 public class Utils {
